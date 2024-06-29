@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Service</title>
+</head>
+
+<style>
+    .service-item-wrapper {
+        display: flex;
+        align-items: stretch; /* Ensure all items are the same height */
+    }
+
+    .service-item {
+        flex: 1; /* Make the service item take up equal space */
+        height: 100%; /* Ensure the service item fills the parent container */
+        display: flex; /* Use Flexbox to align content within the item */
+        flex-direction: column; /* Stack content vertically */
+        justify-content: space-between; /* Distribute space between child elements */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+
+    .service-item i {
+        flex-shrink: 0; /* Prevent the icon from shrinking */
+    }
+
+    .service-item h4, .service-item p {
+        flex-grow: 1; /* Allow the title and subtitle to grow and take up remaining space */
+        margin: 0; /* Remove default margin */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+<body>
+<main layout:fragment="content">
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 bg-hero mb-5">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h1 class="display-1 text-white mb-md-4">Our Services</h1>
+                    <a href="/" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+                    <a href="/service" class="btn btn-secondary py-md-3 px-md-5">Services</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- Services Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="mb-3">
+                            <h6 class="text-primary text-uppercase">Services</h6>
+                            <h1 class="display-5">Organic Farm Services</h1>
+                        </div>
+                        <p class="mb-4">Delivering Exceptional Farm Services to Guarantee the Finest Quality Produce for Your Home</p>
+                        <a href="/contact" class="btn btn-primary py-md-3 px-md-5 mb-4">Contact Us</a>
+                    </div>
+                    <div class="service-item-wrapper">
+                        <div class="service-item bg-light text-center p-5 mb-4" th:each="organicFarm,iterStat : ${organicFarms}" th:if="${iterStat.index == 2}">
+                            <i th:class="${organicFarm.iconClass} + ' display-1 text-primary mb-3'"></i>
+                            <h4 th:text="${organicFarm.title}">Fresh Vegetables</h4>
+                            <p class="mb-0" th:text="${organicFarm.subTitle}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row gx-5 gy-4 service-grid">
+                        <div class="col-lg-6 col-md-12 service-item-wrapper" th:each="organicFarm,iterStat : ${organicFarms}" th:if="${iterStat.index < 2 || iterStat.index >= 3}">
+                            <div class="service-item bg-light text-center p-5">
+                                <i th:class="${organicFarm.iconClass} + ' display-1 text-primary mb-3'"></i>
+                                <h4 th:text="${organicFarm.title}">Fresh Vegetables</h4>
+                                <p class="mb-0" th:text="${organicFarm.subTitle}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Services End -->
+
+
+    <!-- Testimonial Start -->
+    <div class="container-fluid bg-testimonial py-5" style="margin: 90px 0 135px 0;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="owl-carousel testimonial-carousel p-5">
+                        <div th:each="testimonial : ${testimonials}" class="testimonial-item text-center text-white">
+                            <img class="img-fluid mx-auto p-2 border border-5 border-secondary rounded-circle mb-4" th:src="${testimonial.photoUrl}" alt="Client Photo">
+                            <p class="fs-5" th:text="${testimonial.thought}">Client Thought</p>
+                            <hr class="mx-auto w-25">
+                            <h4 class="text-white mb-0" th:text="${testimonial.name}">Client Name</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+</main>
+</body>
+</html>

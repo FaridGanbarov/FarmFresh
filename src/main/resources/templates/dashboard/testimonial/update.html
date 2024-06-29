@@ -1,0 +1,34 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <title>Team Member Update </title>
+</head>
+
+<body>
+<div layout:fragment="container" class="container-fluid">
+    <div>
+        <form action="/admin/testimonial/update" method="post">
+            <div class="form-group">
+                <input th:field="*{name}" class="form-control" type="text" placeholder="Name" />
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </div>
+            <input th:value="${testimonial.id}" class="form-control" type="hidden" placeholder="Id" name="id" />
+            <div class="form-group">
+                <textarea th:field="*{thought}" id="myInput" class="form-control" placeholder="Thought"></textarea>
+                <div th:if="${#fields.hasErrors('thought')}" th:errors="*{thought}"></div>
+            </div>
+            <div class="form-group">
+                <input th:field="*{photoUrl}" class="form-control" type="text" placeholder="Photo URL" />
+                <div th:if="${#fields.hasErrors('photoUrl')}" th:errors="*{photoUrl}"></div>
+            </div>
+            <input type="submit" value="Update" class="btn btn-warning" />
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
+
+

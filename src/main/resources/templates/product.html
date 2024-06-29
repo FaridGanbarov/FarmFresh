@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css}">
+
+    <!-- Owl Carousel JavaScript -->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>-->
+
+</head>
+<body>
+<main layout:fragment="content">
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 bg-hero mb-5">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h1 class="display-1 text-white mb-md-4">Our Products</h1>
+                    <a href="/" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+                    <a href="/product" class="btn btn-secondary py-md-3 px-md-5">Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- Products Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+                <h6 class="text-primary text-uppercase">Products</h6>
+                <h1 class="display-5">Our Fresh & Organic Products</h1>
+            </div>
+            <div class="owl-carousel product-carousel px-5">
+                <div th:each="product : ${products}" class="pb-5">
+                    <div class="position-relative bg-white d-flex flex-column text-center p-3">
+                        <img class="img-fluid mb-4" th:src="${product.photoUrl}" alt="Product Image">
+                        <h6 class="mb-3" th:text="${product.name}">Product Name</h6>
+                        <h5 class="text-primary mb-0" th:text="${product.price} + ' $'">Product Price</h5>
+                        <div class="btn-action d-flex justify-content-center">
+                            <a class="btn bg-secondary py-2 px-3" th:href="@{'/productDetail/' + ${product.id}}"><i class="bi bi-eye text-white"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Products End -->
+
+
+    <!-- Features Start -->
+    <div class="container-fluid bg-primary feature py-5 pb-lg-0" style="margin: 90px 0 135px 0;">
+        <div class="container py-5 pb-lg-0">
+            <div class="mx-auto text-center mb-3 pb-2" style="max-width: 500px;">
+                <h6 class="text-uppercase text-secondary">Features</h6>
+                <h1 class="display-5 text-white">Why Choose Us!!!</h1>
+            </div>
+            <div class="row g-5">
+                <!-- Left Features -->
+                <div class="col-lg-3 d-flex flex-column justify-content-between">
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 0}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 1}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Center Content -->
+                <div class="col-lg-6">
+                    <div class="d-block bg-white h-100 text-center p-5 pb-lg-0">
+                        <p> At Farm Fresh, we are dedicated to providing the highest quality, sustainably sourced produce, harvested at peak freshness, and delivered with exceptional service. Our commitment to organic farming practices ensures that every product is free from harmful chemicals and full of natural goodness. With a focus on innovation and sustainability, we continuously strive to improve our farming techniques and delivery methods to bring you the best of the best. Trust us to bring you healthy, delicious food that you and your family can enjoy with peace of mind</p>
+                        <img class="img-fluid" th:src="@{/img/feature.png}" alt="">
+                    </div>
+                </div>
+                <!-- Right Features -->
+                <div class="col-lg-3 d-flex flex-column justify-content-between">
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 2}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 3}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features End -->
+</main>
+</body>
+

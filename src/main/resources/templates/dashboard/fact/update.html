@@ -1,0 +1,31 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <title>Fact Update</title>
+</head>
+
+<body>
+<div layout:fragment="container" class="container-fluid">
+    <div>
+        <form action="/admin/fact/update" method="post">
+            <div class="form-group">
+                <input th:value="${fact.name}" class="form-control" type="text" placeholder="Name" name="name" />
+            </div>
+            <input th:value="${fact.id}" class="form-control" type="hidden" placeholder="Id" name="id" />
+            <div class="form-group">
+                <input th:value="${fact.number}" class="form-control" type="text" placeholder="Number" name="number" />
+            </div>
+            <div class="form-group">
+                <input th:value="${fact.iconClass}" class="form-control" type="text" placeholder="IconClass" name="iconClass" />
+            </div>
+            <input type="submit" value="Update" class="btn btn-warning" />
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
+
+

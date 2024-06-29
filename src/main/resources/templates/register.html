@@ -1,0 +1,55 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+<head>
+<body>
+<main layout:fragment="content">
+    <!-- Register Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+                <h6 class="text-primary text-uppercase">Register</h6>
+                <h1 class="display-5">Create An Account</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="bg-light rounded p-5">
+                        <form action="/register" method="post">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="confirm-password" class="form-label">Confirm Password</label>
+                                    <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Sign Up</button>
+                                </div>
+                                <div class="col-12 text-center mt-3">
+                                    <p>Already have an account? <a href="/login">Log In</a></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Register End -->
+</main>
+</body>

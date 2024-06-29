@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Organic Farm</title>
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<style>
+    .service-item-wrapper {
+        display: flex;
+        align-items: stretch; /* Ensure all items are the same height */
+    }
+
+    .service-item {
+        flex: 1; /* Make the service item take up equal space */
+        height: 100%; /* Ensure the service item fills the parent container */
+        display: flex; /* Use Flexbox to align content within the item */
+        flex-direction: column; /* Stack content vertically */
+        justify-content: space-between; /* Distribute space between child elements */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+
+    .service-item i {
+        flex-shrink: 0; /* Prevent the icon from shrinking */
+    }
+
+    .service-item h4, .service-item p {
+        flex-grow: 1; /* Allow the title and subtitle to grow and take up remaining space */
+        margin: 0; /* Remove default margin */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
+
+<section layout:fragment="body">
+    <!-- Carousel Start -->
+    <div class="container-fluid p-0">
+        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" th:src="@{/img/carousel-1.jpg}" alt="Image">
+                    <div class="carousel-caption top-0 bottom-0 start-0 end-0 d-flex flex-column align-items-center justify-content-center">
+                        <div class="text-start p-5" style="max-width: 900px;">
+                            <h3 class="text-white">Organic Vegetables</h3>
+                            <h1 class="display-1 text-white mb-md-4">Organic Vegetables For Healthy Life</h1>
+                            <a href="https://en.wikipedia.org/wiki/Organic_food" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
+                            <a href="/contact" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" th:src="@{/img/carousel-2.jpg}" alt="Image">
+                    <div class="carousel-caption top-0 bottom-0 start-0 end-0 d-flex flex-column align-items-center justify-content-center">
+                        <div class="text-start p-5" style="max-width: 900px;">
+                            <h3 class="text-white">Organic Fruits</h3>
+                            <h1 class="display-1 text-white mb-md-4">Organic Fruits For Better Health</h1>
+                            <a href="https://en.wikipedia.org/wiki/Organic_food" class="btn btn-primary py-md-3 px-md-5 me-3">Explore</a>
+                            <a href="/contact" class="btn btn-secondary py-md-3 px-md-5">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <!-- Carousel End -->
+
+    <!-- Banner Start -->
+    <div class="container-fluid banner mb-5">
+        <div class="container">
+            <div class="row gx-0">
+                <div class="col-md-6">
+                    <div class="bg-primary bg-vegetable d-flex flex-column justify-content-center p-5" style="height: 300px;">
+                        <h3 class="text-white mb-3" th:text="${banners[0].title}"></h3>
+                        <p class="text-white" th:text="${banners[0].subTitle}"></p>
+                        <a class="text-white fw-bold" th:href="@{'/readVegetables'}">Read More<i class="bi bi-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="bg-secondary bg-fruit d-flex flex-column justify-content-center p-5" style="height: 300px;">
+                        <h3 class="text-white mb-3" th:text="${banners[1].title}"></h3>
+                        <p class="text-white" th:text="${banners[1].subTitle}"></p>
+                        <a class="text-white fw-bold" th:href="@{'/readFruits'}">Read More<i class="bi bi-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner End -->
+
+    <!-- About Us Start -->
+    <div class="container-fluid about pt-5">
+        <div class="container">
+            <div class="row gx-5" th:each="aboutUs : ${aboutUses}">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="d-flex h-100 border border-5 border-primary border-bottom-0 pt-4">
+                        <img class="img-fluid mt-auto mx-auto" th:src="${aboutUs.photoUrl}" alt="About Us">
+                    </div>
+                </div>
+                <div class="col-lg-6 pb-5">
+                    <div class="mb-3 pb-2">
+                        <h6 class="text-primary text-uppercase">About Us</h6>
+                        <h1 class="display-5" th:text="${aboutUs.title}"></h1>
+                    </div>
+                    <p class="mb-4" th:text="${aboutUs.subTitle}"></p>
+                    <div class="row gx-5 gy-4">
+                        <div class="col-sm-6">
+                            <i class="fa fa-seedling display-1 text-secondary"></i>
+                            <h4>100% Organic</h4>
+                            <p class="mb-0" th:text="${aboutUs.organic}"></p>
+                        </div>
+                        <div class="col-sm-6">
+                            <i class="fa fa-award display-1 text-secondary"></i>
+                            <h4>Award Winning</h4>
+                            <p class="mb-0" th:text="${aboutUs.winning}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About Us End -->
+
+    <!-- Facts Start -->
+    <div class="container-fluid bg-primary facts py-5 mb-5">
+        <div class="container py-5">
+            <div class="row gx-5 gy-4">
+                <div class="col-lg-3 col-md-6" th:each="fact : ${facts}">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                            <i th:class="${fact.iconClass}"></i>
+                        </div>
+                        <div class="ps-4">
+                            <h5 class="text-white" th:text="${fact.name}"></h5>
+                            <h1 class="display-5 text-white mb-0" th:text="${fact.number}" data-toggle="counter-up"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Facts End -->
+
+
+    <!-- Services Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="mb-3">
+                            <h6 class="text-primary text-uppercase">Services</h6>
+                            <h1 class="display-5">Organic Farm Services</h1>
+                        </div>
+                        <p class="mb-4">Delivering Exceptional Farm Services to Guarantee the Finest Quality Produce for Your Home</p>
+                        <a href="/contact" class="btn btn-primary py-md-3 px-md-5 mb-4">Contact Us</a>
+                    </div>
+                    <div class="service-item-wrapper">
+                        <div class="service-item bg-light text-center p-5 mb-4" th:each="organicFarm,iterStat : ${organicFarms}" th:if="${iterStat.index == 2}">
+                            <i th:class="${organicFarm.iconClass} + ' display-1 text-primary mb-3'"></i>
+                            <h4 th:text="${organicFarm.title}">Fresh Vegetables</h4>
+                            <p class="mb-0" th:text="${organicFarm.subTitle}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-6">
+                    <div class="row gx-5 gy-4 service-grid">
+                        <div class="col-lg-6 col-md-12 service-item-wrapper" th:each="organicFarm,iterStat : ${organicFarms}" th:if="${iterStat.index < 2 || iterStat.index >= 3}">
+                            <div class="service-item bg-light text-center p-5">
+                                <i th:class="${organicFarm.iconClass} + ' display-1 text-primary mb-3'"></i>
+                                <h4 th:text="${organicFarm.title}">Fresh Vegetables</h4>
+                                <p class="mb-0" th:text="${organicFarm.subTitle}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Services End -->
+
+    <!-- Features Start -->
+    <div class="container-fluid bg-primary feature py-5 pb-lg-0" style="margin: 90px 0 135px 0;">
+        <div class="container py-5 pb-lg-0">
+            <div class="mx-auto text-center mb-3 pb-2" style="max-width: 500px;">
+                <h6 class="text-uppercase text-secondary">Features</h6>
+                <h1 class="display-5 text-white">Why Choose Us!!!</h1>
+            </div>
+            <div class="row g-5">
+                <!-- Left Features -->
+                <div class="col-lg-3 d-flex flex-column justify-content-between">
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 0}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 1}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Center Content -->
+                <div class="col-lg-6">
+                    <div class="d-block bg-white h-100 text-center p-5 pb-lg-0">
+                        <p> At Farm Fresh, we are dedicated to providing the highest quality, sustainably sourced produce, harvested at peak freshness, and delivered with exceptional service. Our commitment to organic farming practices ensures that every product is free from harmful chemicals and full of natural goodness. With a focus on innovation and sustainability, we continuously strive to improve our farming techniques and delivery methods to bring you the best of the best. Trust us to bring you healthy, delicious food that you and your family can enjoy with peace of mind</p>
+                        <img class="img-fluid" th:src="@{/img/feature.png}" alt="">
+                    </div>
+                </div>
+                <!-- Right Features -->
+                <div class="col-lg-3 d-flex flex-column justify-content-between">
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 2}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                    <div th:each="feature,iterStat : ${features}" th:if="${iterStat.index == 3}">
+                        <div class="text-white mb-5">
+                            <div class="bg-secondary rounded-pill d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
+                                <i th:class="${feature.iconClass} + ' fs-4 text-white'"></i>
+                            </div>
+                            <h4 class="text-white" th:text="${feature.title}"></h4>
+                            <p class="mb-0" th:text="${feature.subTitle}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features End -->
+    <!-- Products Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+                <h6 class="text-primary text-uppercase">Products</h6>
+                <h1 class="display-5">Our Fresh & Organic Products</h1>
+            </div>
+            <div class="owl-carousel product-carousel px-5">
+                <div th:each="product : ${products}" class="pb-5">
+                    <div class="position-relative bg-white d-flex flex-column text-center p-3">
+                        <img class="img-fluid mb-4" th:src="${product.photoUrl}" alt="Product Image">
+                        <h6 class="mb-3" th:text="${product.name}">Product Name</h6>
+                        <h5 class="text-primary mb-0" th:text="${product.price} + ' $'">Product Price</h5>
+                        <div class="btn-action d-flex justify-content-center">
+                            <a class="btn bg-secondary py-2 px-3" th:href="@{'/productDetail/' + ${product.id}}"><i class="bi bi-eye text-white"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Products End -->
+
+
+
+
+    <!-- Testimonial Start -->
+    <div class="container-fluid bg-testimonial py-5" style="margin: 90px 0 135px 0;">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="owl-carousel testimonial-carousel p-5">
+                        <div th:each="testimonial : ${testimonials}" class="testimonial-item text-center text-white">
+                            <img class="img-fluid mx-auto p-2 border border-5 border-secondary rounded-circle mb-4" th:src="${testimonial.photoUrl}" alt="Client Photo">
+                            <p class="fs-5" th:text="${testimonial.thought}">Client Thought</p>
+                            <hr class="mx-auto w-25">
+                            <h4 class="text-white mb-0" th:text="${testimonial.name}">Client Name</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Testimonial End -->
+
+
+    <!-- Team Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+                <h6 class="text-primary text-uppercase">The Team</h6>
+                <h1 class="display-5">We Are Professional Organic Farmers</h1>
+            </div>
+            <div class="row g-5">
+                <div th:each="teamMember, iterStat : ${teamMembers}" th:if="${iterStat.index < 3}" class="col-lg-4 col-md-6">
+                    <div class="row g-0 " style="height: 467px;">
+                        <div class="col-10 h-100">
+                            <div class="position-relative h-100" style=" overflow: hidden;">
+                                <img class="img-fluid w-100 h-100" th:src="${teamMember.photoUrl}" alt="Team Member Photo"  style="object-fit: cover;">
+                                <div class="position-absolute start-0 bottom-0 w-100 py-3 px-4" style="background: rgba(52, 173, 84, .85);">
+                                    <h4 class="text-white" th:text="${teamMember.name}">Farmer Name</h4>
+                                    <span class="text-white" th:utext="${teamMember.designation}">Designation</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="h-100 d-flex flex-column align-items-center justify-content-around bg-secondary py-5">
+                                <a class="btn btn-square rounded-circle bg-white" href="#"><i class="fab fa-twitter text-secondary"></i></a>
+                                <a class="btn btn-square rounded-circle bg-white" href="#"><i class="fab fa-facebook-f text-secondary"></i></a>
+                                <a class="btn btn-square rounded-circle bg-white" href="#"><i class="fab fa-linkedin-in text-secondary"></i></a>
+                                <a class="btn btn-square rounded-circle bg-white" href="#"><i class="fab fa-instagram text-secondary"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Team End -->
+
+    <style>
+        .fixed-size-img {
+            width: 100%;
+            height: 300px; /* Set your desired fixed height */
+            object-fit: cover; /* Ensures the image covers the entire area */
+        }
+    </style>
+
+    <!-- Blog Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+                <h6 class="text-primary text-uppercase">Our Blog</h6>
+                <h1 class="display-5">Latest Articles From Our Blog Post</h1>
+            </div>
+            <div class="row g-5">
+                <div class="col-lg-4" th:each="blog, iterStat : ${blogs}" th:if="${iterStat.index < 3}">
+                    <div class="blog-item position-relative overflow-hidden">
+                        <img class="img-fluid fixed-size-img" th:src="${blog.photoUrl}" alt="Blog Image">
+                        <a class="blog-overlay" th:href="@{'/detail/'+${blog.id}}">
+                            <h4 class="text-white" th:text="${blog.title}">Blog Title</h4>
+                            <span class="text-white fw-bold" th:text="${#dates.format(blog.createdDate, 'MMM dd, yyyy')}"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Blog End -->
+
+
+</section>
+

@@ -1,0 +1,36 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <title>About Us create </title>
+</head>
+
+<body>
+<div layout:fragment="container" class="container-fluid">
+    <div>
+        <form th:action="@{/admin/aboutUs/create}" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input th:value="${aboutUs.title}" class="form-control" type="text" placeholder="Title" name="title" />
+            </div>
+            <div class="form-group">
+                <input th:value="${aboutUs.subTitle}" class="form-control" type="text" placeholder="subTitle" name="subTitle" />
+            </div>
+            <div class="form-group">
+                <input th:value="${aboutUs.organic}" class="form-control" type="text" placeholder="Organic" name="organic" />
+            </div>
+            <div class="form-group">
+                <input th:value="${aboutUs.winning}" class="form-control" type="text" placeholder="Winning" name="winning" />
+            </div>
+            <div class="form-group">
+                <input th:value="${aboutUs.photoUrl}" class="form-control" type="text" placeholder="photoUrl" name="photoUrl" />
+            </div>
+            <input type="submit" value="Create" class="btn btn-success" />
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
+
+

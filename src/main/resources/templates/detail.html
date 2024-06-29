@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Detail</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 bg-hero mb-5">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h1 class="display-1 text-white mb-md-4">Blog Detail</h1>
+                    <a href="/" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+                    <a th:href="@{'/detail/'+${blog.id}}" class="btn btn-secondary py-md-3 px-md-5">Blog Detail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- Blog Start -->
+    <div class="container py-5">
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <!-- Blog Detail Start -->
+                <div class="mb-5">
+                    <div class="row g-5 mb-5">
+                        <div class="col-md-6">
+                            <img class="img-fluid w-100" th:src="${blog.photoUrl}" alt="Blog Image">
+                        </div>
+                    </div>
+                    <h1 th:text="${blog.subTitle}" class="mb-4"></h1>
+                    <p th:utext="${blog.description}"></p>
+
+                </div>
+                <!-- Blog Detail End -->
+
+                <!-- Comment List Start -->
+                <div class="mb-5">
+                    <h2 class="mb-4">3 Comments</h2>
+                    <div class="d-flex mb-4">
+                        <img src="img/user.jpg" class="img-fluid" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
+                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
+                            <button class="btn btn-sm btn-primary">Reply</button>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-4">
+                        <img src="img/user.jpg" class="img-fluid" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
+                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
+                            <button class="btn btn-sm btn-primary">Reply</button>
+                        </div>
+                    </div>
+                    <div class="d-flex ms-5 mb-4">
+                        <img src="img/user.jpg" class="img-fluid" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
+                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
+                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
+                            <button class="btn btn-sm btn-primary">Reply</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Comment List End -->
+
+                <!-- Comment Form Start -->
+                <div class="bg-primary p-5">
+                    <h2 class="text-white mb-4">Leave a comment</h2>
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-12 col-sm-6">
+                                <input type="text" class="form-control bg-white border-0" placeholder="Your Name" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="email" class="form-control bg-white border-0" placeholder="Your Email" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-white border-0" placeholder="Website" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control bg-white border-0" rows="5" placeholder="Comment"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-secondary w-100 py-3" type="submit">Leave Your Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- Comment Form End -->
+            </div>
+
+            <!-- Sidebar Start -->
+            <div class="col-lg-4">
+                <!-- Search Form Start -->
+                <div class="mb-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control p-3" placeholder="Keyword">
+                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+                <!-- Search Form End -->
+
+                <!-- Category Start -->
+                <div class="mb-5">
+                    <h2 class="mb-4">Categories</h2>
+                    <div class="d-flex flex-column justify-content-start bg-primary p-4">
+                        <a th:each="categoryBlog : ${categoryBlogs}"
+                           class="fs-5 fw-bold text-white mb-2">
+                            <i class="bi bi-arrow-right me-2"></i>
+                            <span th:text="${categoryBlog.name}">Category Name</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Category End -->
+
+                <!-- Recent Post Start -->
+                <div class="mb-5">
+                    <h2 class="mb-4">Recent Post</h2>
+                    <div class="bg-primary p-4">
+                        <div th:each="blog, iterStat : ${blogs}" th:if="${iterStat.index < 6}" class="d-flex align-items-center overflow-hidden mb-3">
+                            <img class="img-fluid " th:src="${blog.photoUrl}" style="width: 75px; height:80px; object-fit: cover;" alt="Blog Image">
+                            <a th:href="@{'/detail/'+${blog.id}}" class=" text-aherf d-flex align-items-center bg-white text-dark  fw-bold px-3 py-3 mb-0 blog-title" th:text="${blog.title}">Blog Title</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Post End -->
+
+                <!-- Image Start -->
+                <div class="mb-5">
+                    <img src="img/blog-1.jpg" alt="" class="img-fluid rounded">
+                </div>
+                <!-- Image End -->
+
+                <!-- Plain Text Start -->
+                <div>
+                    <h2 class="mb-4">Plain Text</h2>
+                    <div class="bg-primary text-center text-white" style="padding: 30px;">
+                        <p>FarmFresh is committed to bringing you the freshest produce straight from local farms to your table. Our dedication to quality means you can enjoy fruits and vegetables at their peak, packed with nutrients and flavor</p>
+                    </div>
+                </div>
+                <!-- Plain Text End -->
+            </div>
+            <!-- Sidebar End -->
+        </div>
+    </div>
+    <!-- Blog End -->
+
+</main>
+</body>

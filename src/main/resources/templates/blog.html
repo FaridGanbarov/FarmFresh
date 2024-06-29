@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Blogs</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 bg-hero mb-5">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h1 class="display-1 text-white mb-md-4">Blog Grid</h1>
+                    <a href="/" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+                    <a href="/blog" class="btn btn-secondary py-md-3 px-md-5">Blog Grid</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+    <style>
+        .fixed-size-img {
+            width: 100%;
+            height: 300px; /* Set your desired fixed height */
+            object-fit: cover; /* Ensures the image covers the entire area */
+        }
+    </style>
+
+
+    <!-- Blog Start -->
+    <div class="container py-5">
+        <div class="row g-5">
+            <!-- Blog list Start -->
+            <div class="col-lg-8">
+                <div class="row g-5">
+                    <div class="col-md-6" th:each="blog :${blogs}" >
+                        <div class="blog-item position-relative overflow-hidden">
+                            <img class="img-fluid fixed-size-img" th:src="${blog.photoUrl}" alt="Blog Image">
+                            <a class="blog-overlay" th:href="@{'/detail/'+${blog.id}}">
+                                <h4 class="text-white" th:text="${blog.title}">Blog Title</h4>
+                                <span class="text-white fw-bold" th:text="${#dates.format(blog.createdDate, 'MMM dd, yyyy')}"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination pagination-lg justify-content-center m-0">
+                                <li class="page-item disabled">
+                                    <a class="page-link rounded-0" href="#" aria-label="Previous">
+                                        <span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link rounded-0" href="#" aria-label="Next">
+                                        <span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- Blog list End -->
+
+            <!-- Sidebar Start -->
+            <div class="col-lg-4">
+                <!-- Search Form Start -->
+                <form th:action="@{/blogs/search}" method="get" class="mb-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control p-3" placeholder="Keyword" name="keyword">
+                        <button type="submit" class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                    </div>
+                </form>
+                <!-- Search Form End -->
+                <!-- Category Start -->
+                <div class="mb-5">
+                    <h2 class="mb-4">Categories</h2>
+                    <div class="d-flex flex-column justify-content-start bg-primary p-4">
+                        <a th:each="categoryBlog : ${categoryBlogs}"
+                           class="fs-5 fw-bold text-white mb-2">
+                            <i class="bi bi-arrow-right me-2"></i>
+                            <span th:text="${categoryBlog.name}">Category Name</span>
+                        </a>
+                </div>
+                <!-- Category End -->
+                <!-- Recent Post Start -->
+                <div class="mb-5">
+                <h2 class="mb-4">Recent Post</h2>
+                <div class="bg-primary p-4">
+                    <div th:each="blog, iterStat : ${blogs}" th:if="${iterStat.index < 6}" class="d-flex align-items-center overflow-hidden mb-3">
+                        <img class="img-fluid " th:src="${blog.photoUrl}" style="width: 75px; height:80px; object-fit: cover;" alt="Blog Image">
+                        <a th:href="@{'/detail/'+${blog.id}}" class=" text-aherf d-flex align-items-center bg-white text-dark  fw-bold px-3 py-3 mb-0 blog-title" th:text="${blog.title}">Blog Title</a>
+                    </div>
+                </div>
+            </div>
+
+                <!-- Recent Post End -->
+
+                <!-- Image Start -->
+                <div class="mb-5">
+                    <img src="img/blog-1.jpg" alt="" class="img-fluid rounded">
+                </div>
+                <!-- Image End -->
+
+                <!-- Tags Start -->
+                <div class="mb-5">
+                    <h2 class="mb-4">Tag Cloud</h2>
+                    <div class="d-flex flex-wrap m-n1">
+                        <a class="btn btn-primary m-1">Design</a>
+                        <a class="btn btn-primary m-1">Development</a>
+                        <a class="btn btn-primary m-1">Marketing</a>
+                        <a class="btn btn-primary m-1">SEO</a>
+                        <a class="btn btn-primary m-1">Writing</a>
+                        <a class="btn btn-primary m-1">Consulting</a>
+                        <a class="btn btn-primary m-1">Design</a>
+                        <a class="btn btn-primary m-1">Development</a>
+                        <a class="btn btn-primary m-1">Marketing</a>
+                        <a class="btn btn-primary m-1">SEO</a>
+                        <a class="btn btn-primary m-1">Writing</a>
+                        <a class="btn btn-primary m-1">Consulting</a>
+                    </div>
+                </div>
+                <!-- Tags End -->
+
+                <!-- Plain Text Start -->
+                <div>
+                    <h2 class="mb-4">Plain Text</h2>
+                    <div class="bg-primary text-center text-white" style="padding: 30px;">
+                        <p>FarmFresh is committed to bringing you the freshest produce straight from local farms to your table. Our dedication to quality means you can enjoy fruits and vegetables at their peak, packed with nutrients and flavor</p>
+                    </div>
+                </div>
+                <!-- Plain Text End -->
+            </div>
+            <!-- Sidebar End -->
+        </div>
+    </div>
+    <!-- Blog End -->
+</main>
+</body>

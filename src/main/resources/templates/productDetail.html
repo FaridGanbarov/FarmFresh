@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Detail</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 bg-hero mb-5">
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <h1 class="display-1 text-white mb-md-4">Organic Products</h1>
+                    <a href="/" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+                    <a href="/productDetail" class="btn btn-secondary py-md-3 px-md-5">Product Detail</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+    <!-- Information Start-->
+    <div class="container">
+        <div class="mx-auto text-center mb-5" style="max-width: 500px;">
+            <h6 class="text-primary text-uppercase" th:text="${product.categoryProduct.name}">Category Name</h6>
+            <h1 class="display-5" th:text="${product.name}">Product Name</h1>
+        </div>
+        <div class="mx-auto text-center mb-5">
+            <div class="d-block bg-white h-100 text-center mb-5 pb-lg-0">
+                <p th:utext="${product.description}">Product Description</p>
+                <img class="img-fluid" th:src="${product.photoUrl}" alt="Product Image">
+            </div>
+        </div>
+    </div>
+
+
+</main>
+</body>

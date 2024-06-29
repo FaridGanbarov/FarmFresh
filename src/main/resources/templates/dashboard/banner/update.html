@@ -1,0 +1,28 @@
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <title>OrganicFarm Update</title>
+</head>
+
+<body>
+<div layout:fragment="container" class="container-fluid">
+    <div>
+        <form action="/admin/banner/update" method="post">
+            <div class="form-group">
+                <input th:value="${banner.title}" class="form-control" type="text" placeholder="Title" name="title" />
+            </div>
+            <input th:value="${banner.id}" class="form-control" type="hidden" placeholder="Id" name="id" />
+            <div class="form-group">
+                <input th:value="${banner.subTitle}" class="form-control" type="text" placeholder="SubTitle" name="subTitle" />
+            </div>
+            <input type="submit" value="Update" class="btn btn-warning" />
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
+
+
